@@ -1,0 +1,88 @@
+<div class="col py-3" style="padding-left: 300px; margin-top: -750px">
+  <h5>Liste des utilisateurs</h5>
+  <i
+    style="padding-left: 97%"
+    class="fa-solid fa-user-plus fa-xl"
+    (click)="goToAdd()"
+  ></i>
+ 
+  
+  <br /><br />
+
+  <div class="filter-container">
+    <input type="text" [(ngModel)]="filterNom" placeholder="Nom" />
+    <input type="text" [(ngModel)]="filterPrenom" placeholder="Prénom" />
+    <input type="text" [(ngModel)]="filterMatricule" placeholder="Matricule" />
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="resetFilters()"
+    >
+      Réinitialiser
+    </button>
+  </div>
+  <br />
+
+  <div class="table-responsive">
+    <table class="table table-hover table-nowrap">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Matricule</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let user of users$ | async; let i = index"
+          [hidden]="
+            (filterNom &&
+              !user.name.toLowerCase().includes(filterNom.toLowerCase())) ||
+            (filterPrenom &&
+              !user.lastName
+                .toLowerCase()
+                .includes(filterPrenom.toLowerCase())) ||
+            (filterMatricule &&
+              !user.matricule
+                .toLowerCase()
+                .includes(filterMatricule.toLowerCase()))
+          "
+        >
+          <td>
+            <a class="text-heading font-semibold">
+              <td></td>
+              {{ user.matricule }}</a
+            >
+          </td>
+          <td>{{ user.lastName }}</td>
+          <td>
+            <a class="text-heading font-semibold"> {{ user.name }} </a>
+          </td>
+          <td>{{ user.adresse }}</td>
+          <td>
+            <span class="badge badge-lg badge-dot">
+              <i class="bg-success"></i>
+            </span>
+          </td>
+          <td class="text-end">
+            <a
+              routerLink="/view-detail/{{ user._id }}"
+              class="btn btn-sm btn-neutral"
+              >View</a
+            >
+            <button
+              type="button"
+              class="btn btn-sm btn-square btn-neutral text-danger-hover"
+              (click)="user._id ? deleteUser(user._id) : null"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+
+        
+       
+    

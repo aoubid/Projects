@@ -1,0 +1,30 @@
+
+<div class="col py-3" style="padding-left: 300px; margin-top: -750px;">
+<!-- Formulaire pour ajouter un nouvel utilisateur -->
+<h5>Ajouter un utilisateur</h5>
+<div>
+    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+        <label>
+            Matricule:
+            <input type="text" name="matricule" [(ngModel)]="newUser.matricule" required>
+          </label>
+      <label>
+        Nom:
+        <input type="text" name="name" [(ngModel)]="newUser.name" required>
+      </label>
+      <br>
+      <label>
+        Prénom:
+        <input type="text" name="lastName" [(ngModel)]="newUser.lastName" required>
+      </label>
+      <br>
+      <label>
+        Adresse:
+        <input type="text" name="adresse" [(ngModel)]="newUser.adresse" required>
+      </label>
+      <br>
+      <button type="submit">Ajouter</button>
+      <a routerLink="/users" class="fa-solid fa-right-from-bracket fa-lg" style="padding-left: 66%;"></a>
+    </form>
+  </div>
+</div>
